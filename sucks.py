@@ -11,6 +11,7 @@ if __name__ == "__main__":
     socks_server_port = argv[2]
   except:
     print "sucks <socks-server-ip> <socks-server-port>"  
+    exit()
 
 
 def sint(x):
