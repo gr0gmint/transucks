@@ -1,4 +1,5 @@
-from twisted.internet.protocol import Factory,Protocol
+from twisted.internet.protocol import Factory,Protocol,ClientCreator
+from twisted.protocols.socks import SOCKSv4,SOCKSv4Outgoing
 from twisted.internet import reactor
 import socket
 import sys
@@ -7,8 +8,8 @@ import sys
 SO_ORIGINAL_DST = 80
 if __name__ == "__main__":
   try:
-    socks_server_ip = argv[1]
-    socks_server_port = argv[2]
+    socks_host = argv[1]
+    socks_port = argv[2]
   except:
     print "sucks <socks-server-ip> <socks-server-port>"  
     exit()
@@ -25,6 +26,8 @@ class TransSOCKS(Protocol):
     self.dst_info = self.transport.socket.getsockopt(socket.SOL_IP, SO_ORIGINAL_DST,16)
     self.dst_port = sint(self.dst_info[2:4])
     self.dst_addr = socket.inet_ntoa(self.dst_info[4:8])
+    
+    
   def dataReceived(self, data):
     print self.dst_addr, " ", self.dst_port
     
