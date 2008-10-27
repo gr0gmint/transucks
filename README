@@ -1,0 +1,11 @@
+This program depends on the Twisted framework.
+
+Example to setup iptables, and route all traffic from the user 'ssh' through transucks:
+
+	iptables -t nat -A OUTPUT -m owner --uid-owner ssh -p tcp -m tcp --syn -j REDIRECT --to-ports 1337
+	iptables -t nat -A OUTPUT -m owner --uid-owner ssh -j DROP
+
+---
+
+Bugs, patches & suggestions:
+mint@gr0g.org
